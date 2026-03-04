@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parol Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+  <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
+    <h2 class="text-2xl font-bold text-center mb-6">Random Parol Generator</h2>
+
+    <input id="length" type="number" min="4" max="32" value="8"
+      class="w-full p-3 border rounded-lg mb-4"
+      placeholder="Parol uzunligi">
+
+    <button id="generate"
+      class="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 font-semibold">
+      Parol Yaratish
+    </button>
+
+    <input id="result" type="text" readonly
+      class="w-full p-3 border rounded-lg mt-4 bg-gray-100 text-center font-semibold">
+  </div>
+
+  <script>
+    const lengthInput = document.getElementById("length");
+    const resultInput = document.getElementById("result");
+    const generateBtn = document.getElementById("generate");
+
+    // 🔥 chars endi ARRAY
+    const chars = [
+      'A','B','C','D','E','F','G','H','I','J','K','L','M',
+      'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+      'a','b','c','d','e','f','g','h','i','j','k','l','m',
+      'n','o','p','q','r','s','t','u','v','w','x','y','z',
+      '0','1','2','3','4','5','6','7','8','9',
+      '!','@','#','$','%','^','&','*','(',')'
+    ];
+
+    generateBtn.addEventListener("click", function () {
+      const length = parseInt(lengthInput.value);
+      let password = "";
+
+      if (isNaN(length) || length < 4) {
+        resultInput.value = "Kamida 4 ta belgidan iborat bo‘lsin";
+        return;
+      }
+
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * chars.length);
+        password += chars[randomIndex];
+      }
+
+      resultInput.value = password;
+    });
+  </script>
+
+</body>
+</html>
